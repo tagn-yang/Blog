@@ -18,7 +18,9 @@
 {% endblock %}
 
 {% block main %}
-    {% for post in post_list %}
+    <ul>
+        {% for post in post_list %}
+    </ul>
     <div class="card post">
         <div class="card-body">
             <h5 class="card-title"><a href="{% url 'post-detail' post.id %}">

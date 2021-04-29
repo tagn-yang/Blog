@@ -29,7 +29,7 @@ class Link(models.Model):
         return self.title
 
 
-class Sidebar(models.Model):
+class SideBar(models.Model):
     DISPLAY_HTML = 1
     DISPLAY_LATEST = 2
     DISPLAY_HOT = 3
@@ -40,7 +40,7 @@ class Sidebar(models.Model):
         (DISPLAY_HOT, 'hot articles'),
         (DISPLAY_COMMENT, 'recent articles'),
     )
-    objects = None
+    # objects = None
     STATUS_SHOW = 1
     STATUS_HIDE = 0
     STATUS_ITEMS = (
@@ -58,7 +58,7 @@ class Sidebar(models.Model):
     display_type = models.PositiveIntegerField(default=1, choices=SIDE_TYPE,
                                                verbose_name='show type')
     content = models.CharField(max_length=500, blank=True, verbose_name='content',
-                               help_text='if setting is not HTML, it can be NULL')
+                               help_text='if setting is not HTML type, it can be NULL')
     status = models.PositiveIntegerField(default=STATUS_SHOW,
                                          choices=STATUS_ITEMS, verbose_name='status')
     weight = models.PositiveIntegerField(default=1, choices=zip(range(1, 6),

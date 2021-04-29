@@ -5,7 +5,7 @@
 {% endblock %}
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}index{% endblock %}- blog system</title>
+    <title>{% block title %}Index{% endblock %}- Blog System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,
         shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -18,10 +18,10 @@
 <body>
     <div class="container head">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/" class="navbar-brand">index</a>
+            <a href="/" class="navbar-brand">Index</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nar mr-auto">
-                {% for cate in category %}
+                {% for cate in navs %}
                     <li class="nav-item">
                         <a href="{% url 'category-list' cate.id %}" class="nav-link">
                             {{ cate.name }}
@@ -44,15 +44,6 @@
     <div class="container main">
         <div class="row">
             <div class="col-9 post-list">
-            {% block extra_head %}
-                <link rel="stylesheet"
-                      href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/googlecode.min.css">
-                <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js">
-                    </script>
-                <script>hljs.initHighlightingOnLoad();</script>
-            {% endblock %}
-            {% block main %}
-            {% endblock %}
             </div>
             <div class="col-3">
                 {% block sidebar %}

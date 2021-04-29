@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
+from django.contrib.admin.models import LogEntry
 
 from blog.custom_site import custom_site
 from .models import Category, Post, Tag
@@ -22,13 +23,13 @@ class CategoryAdmin(BaseOwnerAdmin):
 
     def post_count(self, obj):
         """
-        count articles'numbers
+        count the numbers of articles
         :param obj:
-        :return: articles'numbers
+        :return: the numbers of articles
         """
         return obj.post_set.count()
 
-    post_count.short_description = "articles'bumbers"
+    post_count.short_description = "the numbers of articles"
 
 
 @admin.register(Tag, site=custom_site)
@@ -55,6 +56,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 @admin.register(Post, site=custom_site)
 class PostAdmin(BaseOwnerAdmin):
+    forms = PostAdminForm
     list_display = [
         'title', 'category', 'status',
         'created_time', 'operator'
@@ -62,24 +64,45 @@ class PostAdmin(BaseOwnerAdmin):
     # click to access the edit page
     list_display_links = []
 
-    list_filter = [CategoryOwnerFilter]
+    list_filter = [CategoryOwnerFilter, ]
     search_fields = ['title', 'category__name']
 
-    forms = PostAdminForm
     actions_on_top = True
     actions_on_bottom = True
 
     # edit page
     save_on_top = True
-    exclude = ['owner']
+    exclude = ['owner']  # don't show
 
-    fields = (
-        ('category', 'title'),
-        'desc',
-        'status',
-        'content',
-        'tag',
+    # fields = (
+    #     ('category', 'title'),
+    #     'desc',
+    #     'status',
+    #     'content',
+    #     'tag',
+    # )
+
+    fieldsets = (
+        ('infrastructure configuration', {
+            'description': 'infrastructure configuration description',
+            'fields': (
+                ('title', 'category'),
+                'status'
+            )
+        }),
+        ('content', {
+            'fields': (
+                'desc',
+                'content'
+            ),
+        }),
+        ('extra information', {
+            'classes': ('collapse',),
+            'fields': ('tag',),
+        })
     )
+    # filter_horizontal = ('tag', )
+    filter_vertical = ('tag',)
 
     class Media:
         css = {
@@ -97,3 +120,7 @@ class PostAdmin(BaseOwnerAdmin):
     operator.short_description = 'operate'
 
 
+@admin.register(LogEntry, site=custom_site)
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ['object_repr', 'object_id', 'action_flag', 'user',
+                    'change_message']

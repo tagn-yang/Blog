@@ -5,8 +5,7 @@ from django.utils.functional import cached_property
 
 
 class Category(models.Model):
-    object = None
-    objects = None
+    # objects = None
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
     STATUS_ITEMS = (
@@ -33,6 +32,7 @@ class Category(models.Model):
     """
         two database requests generated, 2 i/o
     """
+
     #     categories = cls.objects.filter(status=cls.STATUS_NORMAL)
     #     nav_categories = categories.filter(is_nav=True)
     #     normal_categories = categories.filter(is_nav=False)
@@ -64,7 +64,7 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
-    objects = None
+    # objects = None
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
     STATUS_ITEMS = (
@@ -86,7 +86,7 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    objects = None
+    # objects = None
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
     STATUS_DRAFT = 2
@@ -119,19 +119,20 @@ class Post(models.Model):
     @staticmethod
     def get_by_tag(tag_id):
         try:
-            tag = Tag.object.get(id=tag_id)
+            tag = Tag.objects.get(id=tag_id)
         except Tag.DoseNotExist:
             tag = None
             post_list = []
         else:
-            post_list = tag.post_set.filter(status=Post.STATUS_NORMAL).select_related('owner', 'category')
+            post_list = tag.post_set.filter(status=Post.STATUS_NORMAL) \
+                .select_related('owner', 'category')
 
         return post_list, tag
 
     @staticmethod
     def get_by_category(category_id):
         try:
-            category = Category.object.get(id=category_id)
+            category = Category.objects.get(id=category_id)
         except Category.DoseNotExist:
             category = None
             post_list = []
@@ -146,7 +147,7 @@ class Post(models.Model):
         return queryset
 
     @classmethod
-    def host_posts(cls):
+    def hot_posts(cls):
         return cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
 
     def save(self, *args, **kwargs):

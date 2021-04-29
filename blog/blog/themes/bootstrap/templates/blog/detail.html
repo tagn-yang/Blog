@@ -6,18 +6,25 @@
 </head>
 <body>
 {% extends "./base.html" %}
-{% block title %} {{post.title }} {% endblock %}
+{% block title %} {{ post.title }} {% endblock %}
 
-{% block main %}
+    {% block extra_head %}
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/googlecode.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js">
+        </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    {% endblock %}
+    {% block main %}
     {% if post %}
     <h1>{{ post.title }}</h1>
     <div>
         <span>category:{{ post.category.name }}</span>
-        <span>author:{{post.owner.username }}</span>
+        <span>author:{{ post.owner.username }}</span>
     </div>
     <hr/>
     <p>{% autoescape off %}
-        {{ post.content_html }}
+        {{ post.content }}
         {% endautoescape %}</p>
     {% endif %}
 {% endblock %}
@@ -26,12 +33,12 @@
     <form action="/comment/" class="form-group" method="POST">
         {% csrf_token %}
         <input name="target" type="hidden"  value="{{ request.path }}"/>
-        {{ comment_type }}
+        {{ comment_form }}
         <input type="submit" value="written!"/>
     </form>
-<!--    coment list-->
-    <ul class="list-froup">
-        {% for comment in commnet_list %}
+<!--    comment list-->
+    <ul class="list-group">
+        {% for comment in comment_list %}
         <li class="list-group-item">
             <div class="nickname">
                 <a href="{{ comment.website }}">{{ comment.nickname }}</a>

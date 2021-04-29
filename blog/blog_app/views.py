@@ -65,9 +65,9 @@ from comment_app.models import Comment
 class CommentViewMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        from blog.config_app.models import Sidebar
+        from blog.config_app.models import SideBar
         context.update({
-            'sidebar': Sidebar.get_all(),
+            'sidebar': SideBar.get_all(),
         })
         context.update(Category.get_navs())
         return context
@@ -115,6 +115,7 @@ class TagView(IndexView):
 
 
 class PostDetailView(CommentViewMixin, DetailView):
+    # model = Post
     queryset = Post.latest_posts()
     template_name = 'blog/detail.html'
     context_object_name = 'post'
