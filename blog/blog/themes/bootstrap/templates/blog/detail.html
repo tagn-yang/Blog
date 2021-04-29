@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "./base.html" %}
+{% block title %} {{post.title }} {% endblock %}
+
+{% block main %}
+    {% if post %}
+    <h1>{{ post.title }}</h1>
+    <div>
+        <span>category:{{ post.category.name }}</span>
+        <span>author:{{post.owner.username }}</span>
+    </div>
+    <hr/>
+    <p>{% autoescape off %}
+        {{ post.content_html }}
+        {% endautoescape %}</p>
+    {% endif %}
+{% endblock %}
+<hr/>
+<div class="comment">
+    <form action="/comment/" class="form-group" method="POST">
+        {% csrf_token %}
+        <input name="target" type="hidden"  value="{{ request.path }}"/>
+        {{ comment_type }}
+        <input type="submit" value="written!"/>
+    </form>
+<!--    coment list-->
+    <ul class="list-froup">
+        {% for comment in commnet_list %}
+        <li class="list-group-item">
+            <div class="nickname">
+                <a href="{{ comment.website }}">{{ comment.nickname }}</a>
+                <span>{{ comment.created_time }}</span>
+            </div>
+            <div class="comment-content">
+                {{ comment.content }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

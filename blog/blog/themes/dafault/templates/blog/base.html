@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}index{% endblock %}- blog system</title>
+</head>
+<body>
+    <div>top category:
+        {% for cate in navs %}
+        <a href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
+        {% endfor %}
+    </div>
+    <hr/>
+    {% block main %}
+    {% endblock %}
+
+    <hr/>
+    <div>low part category:
+        {% for cate in categories %}
+        <a href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
+        {% endfor %}
+    </div>
+    <div>sidebar show:
+        {% for sidebar in sidebars %}
+            <h4>{{ sidebar.title }}</h4>
+            {{ sidebar.content_html }}
+        {% endfor %}
+    </div>
+
+</body>
+</html>

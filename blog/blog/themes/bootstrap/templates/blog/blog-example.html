@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blog -by tagn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+        shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css">
+    <style>
+      .post {
+          margin-bottom: 5px;
+          }
+    </style>
+</head>
+<body>
+    <div class="container head">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="#" class="navbar-brand">index</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Python</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Django comabt</a>
+                    </li>
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">Tornado</a>
+                    </li>
+                </ul>
+                <form class="from-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="jumbotron">
+            <h1 class="display-4">blog</h1>
+            <p class="lead">A Multi-person Blog System based on django</p>
+        </div>
+    </div>
+    <div class="container main">
+        <div class="row">
+            <div class="col-9 post-list">
+                <div class="card post">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">this is the title</a></h5>
+                        <span class="card-link">author:<a href="#">gao</a></span>
+                        <span class="card-link">category:<a href="#">Python</a></span>
+                        <span class="card-link">label:
+                            <a href="#">Python</a>
+                            <a href="#">Django</a>
+                            <a href="#">experience</a>
+                        </span>
+                        <p class="card-text">Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                            <a href="#">full content</a></p>
+                    </div>
+                </div>
+                <div class="card post">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">this is the title</a></h5>
+                        <span class="card-link">author:<a href="#">gao</a></span>
+                        <span class="card-link">category:<a href="#">Python</a></span>
+                        <span class="card-link">label:
+                            <a href="#">Python</a>
+                            <a href="#">Django</a>
+                            <a href="#">experience</a>
+                        </span>
+                        <p class="card-text">Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                            <a href="#">full content</a></p>
+                    </div>
+                </div>
+                <div class="card post">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">this is the title</a></h5>
+                        <span class="card-link">author:<a href="#">gao</a></span>
+                        <span class="card-link">category:<a href="#">Python</a></span>
+                        <span class="card-link">label:
+                            <a href="#">Python</a>
+                            <a href="#">Django</a>
+                            <a href="#">experience</a>
+                        </span>
+                        <p class="card-text">Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                            <a href="#">full content</a></p>
+                    </div>
+                </div>
+                <a href="?page={{ page_obj.previous_page_number }}">previous page</a>
+                page 1 of 1.
+                <a href="?page={{ page_obj.next_page_number">next page</a>
+            </div>
+            <div class="col-3">
+                <div class="card sidebar">
+                    <div class="card-bogy">
+                        <h4 class="card-title">About the blogger</h4>
+                        <p>
+                            screen name:tagn, For years Python engineer
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <hr/>
+            <nav class="nav category">
+                <a href="#" class="nav-link">reading books</a>
+                <a href="#" class="nav-link">products</a>
+                <a href="#" class="nav-link">work experience</a>
+            </nav>
+        </div>
+        <div class="container_power">
+            <span class="text-muted">Power by blog@tagns</span>
+        </div>
+    </footer>
+</body>
+</html>
